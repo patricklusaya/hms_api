@@ -12,6 +12,7 @@ import java.util.Set;
 @Setter
 public class RegistrationRequest {
     public  String username;
+    public  String department;
     public  String fullname;
     public  String email;
     public String password;

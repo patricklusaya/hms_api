@@ -42,8 +42,8 @@ public class AuthService {
        employee.setEmail(registrationRequest.getEmail());
        employee.setUsername(registrationRequest.getUsername());
        employee.setFullname(registrationRequest.getFullname());
-
-       employee.setPassword(encoder.encode(registrationRequest.getPassword()));
+       employee.setDepartment(registrationRequest.getDepartment());
+       employee.setPassword(encoder.encode("123456"));
 
         Set<String> strRoles = registrationRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -111,11 +111,13 @@ public class AuthService {
                 .collect(Collectors.toList());
 
 
-        return new AuthenticationResponse(jwt,
+        return new AuthenticationResponse(
+                jwt,
                 userDetails.getId(),
-                userDetails.getUsername(),
                 userDetails.getEmail(),
+                userDetails.getUsername(),
                 userDetails.getFullname(),
+                userDetails.getDepartment(),
                 roles);
     }
     }

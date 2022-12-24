@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private String id;
 
     private String username;
 
@@ -25,14 +25,19 @@ public class UserDetailsImpl implements UserDetails {
 
     private String fullname;
 
+    private  String department;
+
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,String fullname,
+    public UserDetailsImpl(String id, String username, String email, String department,
+                           String password, String fullname,
                            Collection<? extends GrantedAuthority> authorities) {
+
         this.id = id;
+        this.department = department;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -49,6 +54,7 @@ public class UserDetailsImpl implements UserDetails {
                 employee.getId(),
                 employee.getUsername(),
                 employee.getEmail(),
+              employee.getDepartment(),
                 employee.getPassword(),
                 employee.getFullname(),
                 authorities);
@@ -59,7 +65,7 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -76,6 +82,9 @@ public class UserDetailsImpl implements UserDetails {
     public String getUsername() {
         return username;
     }
+
+
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -95,6 +104,14 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     @Override

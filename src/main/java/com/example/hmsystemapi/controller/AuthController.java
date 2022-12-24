@@ -7,13 +7,16 @@ import com.example.hmsystemapi.dto.requests.RegistrationRequest;
 import com.example.hmsystemapi.dto.requests.response.AuthenticationResponse;
 import com.example.hmsystemapi.dto.requests.response.MessageResponse;
 import com.example.hmsystemapi.repository.EmployeeRepository;
+import com.example.hmsystemapi.repository.PatientRepository;
 import com.example.hmsystemapi.repository.RoleRepository;
 import com.example.hmsystemapi.service.AuthService;
+import com.example.hmsystemapi.util.ReportUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -25,7 +28,9 @@ public class AuthController {
     public RoleRepository roleRepository;
     @Autowired
     public AuthService authService;
-    @PostMapping("/signup")
+
+
+    @PostMapping("/register-employee")
 
     public ResponseEntity<?> registerEmployee( @Valid  @RequestBody RegistrationRequest registrationRequest){
       if (employeeRepository.existsByUsername(registrationRequest.getUsername())){
